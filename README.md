@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Final Capstone
+Submit via the "React Capstone" Guide in the curriculum: https://classroom.devpipeline.com/mod/assign/view.php?id=772
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Routing
+1. **Landing Page**
+   
+2. **About Page**
+- [ ] Describe your project
+- [ ] What are your industry goals
+- [ ] What did you learn in your time here at DevPipeline so far
+- [ ] What projects have you built
+- [ ] What is your favorite language, and why
 
-## Available Scripts
+3. **Gallery**
+- [ ] Fetch data from given api
+- [ ] Display the poster image and title at the least
+- [ ] Link each poster to a show page
+- [ ] Setup filters for tv shows (maybe network, genre, rating, etc) (at least 2 filters)
 
-In the project directory, you can run:
+4. **Show Page**
+- [ ] Fetch the appropriate show from the given api
+- [ ] Display information about the show in question
+- [ ] Big image, title, rating, description, network, maybe there's trailer??? Etc...
+- [ ] This page should be clean but VERY information heavy.
+- [ ] Setup the ability to allow reviews to be written about the show
+- [ ] These do not need to be persistent. If they disappear on refresh, that's ok, but try working with localstorage if you'd like to stretch yourself.
+- [ ] Create, Update, and Delete Reviews.
 
-### `npm start`
+5. **Contact**
+- [ ] Web form
+  - email
+  - first name
+  - last name
+  - subject
+  - content (text area)
+  - Submit button
+    - This needs a submit handler, but you just need to display something like an alert, it doesn't have to actually send an email off.
+  - Contact information
+    - Does not need to actually contain your real info. Fake info is perfect.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Navigation
+- [ ] Sidebar or Header
+- [ ] Footer
+- [ ] Pages may have other links to navigate around the app as well (like a "go back" type button)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Research and Bring in a library you haven't used or learned about in class
+**IE:*- [ ] a carousel component to display your shows.
 
-### `npm test`
+This **MUST*- [ ] be responsive. Develop your projects for at least desktop and mobile phone. Any other breakpoints would be extra.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+**ALL*- [ ] pages that have asynchronous behavior need to reflect good UX (IE: Disabling buttons, rendering loading components, etc).
 
-### `npm run build`
+You need to include a valid SCSS mixin.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+You need to include a SCSS variable
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+You must use the CRA toolchain to spin up your project. 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Prune all irrelevant tools (files, functions, comments, dependencies, etc…)
 
-### `npm run eject`
+Include at LEAST one icon from font awesome. Set it up for a global store, not individual imports.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Commit commit commit!!!*- [ ] I should not see 1 commit for the entire project. Find logical stopping points to commit and push to Github. (IE: per feature). I will not accept excuses related to you losing your code, that is a failing mark.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+You will be graded on things like proper data flow, code composition, best practices, naming conventions, proper state and prop management, along with having the requirements met.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This is an **INDIVIDUAL*- [ ] project. You can only use your mentors, TA's, or instructor for help (in that order).
+You can work in groups, but leveraging each other's code will result in both students failing. Don't test this!
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Resources 
+1. **API:**
+	- [ ] https://static.tvmaze.com/apidoc/
+	- [ ] https://www.tvmaze.com/api
+	- [ ] Base url for shows https://api.tvmaze.com/show
+2. **NPM:**
+    - [ ] Font awesome libraries
+    - [ ] SASS library (as a dev dep)
+    - [ ] React router dom@5
+    - [ ] One library you haven't learned about or worked with before
 
-## Learn More
+Use other sites for design ideas. The internet is a big place.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+If you have time, try your hand at deploying to Netlify (or other hosting service). This is NOT a requirement. Focus on this last if anything.
