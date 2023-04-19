@@ -15,7 +15,6 @@ export default function ShowItem(props) {
   const episode = props.show
   const show = props.show.show
 
-  console.log(show.name)
   return (
     <div className="show-item">
       <div className="banner-img-wrapper">

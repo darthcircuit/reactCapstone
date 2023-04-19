@@ -19,11 +19,6 @@ export default function ScheduleEpisode(props) {
   const episode = props.show.name
   const show = props.show.show.name
 
-
-
-  console.log("Inside Schedule Episode")
-
-
   return (
     <div className="episode-wrapper">
       <h3>{show}</h3>
