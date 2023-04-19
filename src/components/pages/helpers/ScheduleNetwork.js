@@ -16,11 +16,14 @@ export default function ScheduleNetwork(props) {
   return (
     <div className="network-wrapper" key={networkName}>
 
-      <h6>
+      <h4 className="network-name">
         {networkName}
-      </h6>
+      </h4>
+
+        <div className="shows-wrapper">
 
         {renderEpisodes()}
+        </div>
 
     
     </div>

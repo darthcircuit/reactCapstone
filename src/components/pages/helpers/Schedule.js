@@ -56,14 +56,8 @@ export default function Schedule(props) {
 
   return (
 
-    <>
-    {/* {renderNetwork()} */}
-
-    <div className="show">
-      {/* <p>{renderEpisodes()}</p> */}
+    <div className="schedule">
       {renderNetworks()}
     </div>
-    {/* {renderEpisodes()} */}
-    </>
   )
 }

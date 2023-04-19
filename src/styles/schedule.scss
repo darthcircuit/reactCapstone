@@ -1,0 +1,33 @@
+.schedule{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .network-wrapper {
+        display:flex;
+        // border: solid black 2px;
+        justify-content: center;
+        align-items: center;
+        // overflow:scroll;
+        width: 85%;
+        height: 150px;
+
+        .network-name {
+            padding: 10px;
+            width: 150px;
+        }
+        .shows-wrapper {
+            display:flex;
+            height: 100%;
+            width: 100%;
+            overflow: scroll;
+            .episode-wrapper{
+                border: black solid 1px;
+                min-width: fit-content;
+                padding: 10px;
+                
+            }
+        }
+    }
+
+}
