@@ -22,7 +22,7 @@ export default function ScheduleEpisode(props) {
   return (
     <div className="episode-wrapper">
       <h3>{show}</h3>
-      <p>{episode}</p>
+      <div>{episode}</div>
     </div>
 )
 

@@ -18,7 +18,7 @@ export default function ShowItem(props) {
   return (
     <div className="show-item">
       <div className="banner-img-wrapper">
-        <Link to={`/products/${props.id}`}>
+        <Link to={`/products/${props.key}`}>
           <img
             src={show.image.original}
             height={150}

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import ScheduleEpisode from "./ScheduleEpisode"
+import ScheduleNetwork from "./ScheduleNetwork"
 
 export default function Schedule(props) {
 
@@ -8,75 +9,59 @@ export default function Schedule(props) {
   const time = String(new Date(Date.now()))
   const shows = props.sched
 
-
   useEffect(() => {
-    shows.map((s) => {
-      try {
-        console.log(s.show.network.id)
-      } catch(err) {
-        console.error("Missing Network ID for " + s.name + ":" + err)
-        return
+    if (!shows) {
+      return;
+    }
+
+    const workingNetworks = {};
+
+    shows.forEach(show => {
+      const networkName = show.show.network?.name ? show.show.network.name : 'TDB';
+
+      if (!workingNetworks[networkName]) {
+        workingNetworks[networkName] = [];
       }
-      
-      const ids = []
-      setNetworks((p) => {
-        const currentNetwork = s.show.network.id
 
-        if (!ids.includes(currentNetwork)) {
-          ids.push(currentNetwork)
+      workingNetworks[networkName].push(show);
+    });
 
-          console.log(...p[currentNetwork].slice(0,p[currentNetwork].length))
-          return {...p, [currentNetwork] : [...p[currentNetwork].slice(0,p[currentNetwork].length), s ] }
-
-          } else {
-            return {...p, [currentNetwork]: [s,]}
-          }
-
-          })
-          
-
-    //   if (!networks.includes(s.show.network.id)) {
-    //     setNetworks([...networks], s.show.network.id)
-    //   }
-    })  
-   }, [])
-
-
-      
-  
-
+    setNetworks(workingNetworks);
+    // console.log(workingNetworks);
+  }, [shows]);
 
 
   function renderEpisodes(){
 
     // return shows.map((show) => <ScheduleEpisode show={show} />)
-    console.log(networks)
   }
 
-  function renderNetwork(){
-  return(
+  function renderNetworks(){
+    
+    return (
+      
+      Object.keys(networks).map((n) => {
+
+        if (n) {
+          return <ScheduleNetwork shows={networks[n]} name={n} key={n}/>
+        }
+
+      }
+      )
+
+    )
+  }
 
 
-    <div className="schedule">
-      {time}
 
-        <div className="channel-wrapper">
-          {renderEpisodes()}
-        </div>
-
-
-
-    </div>
-
-  )
-}
   return (
 
     <>
     {/* {renderNetwork()} */}
 
     <div className="show">
-      <p>{renderEpisodes()}</p>
+      {/* <p>{renderEpisodes()}</p> */}
+      {renderNetworks()}
     </div>
     {/* {renderEpisodes()} */}
     </>
