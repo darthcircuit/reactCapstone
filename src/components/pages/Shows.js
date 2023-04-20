@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react"
 
+import unk from "../../images/unknown.png"
 export default function Shows() {
   
   const [loaded, setLoaded] = useState(false)
   const [shows, setShows] = useState([])
-  const [page, setPage] = useState(0)
+  const [page, setPage] = useState(270)
+  
 
   useEffect(() => {
     if (loaded) {
@@ -45,22 +47,27 @@ export default function Shows() {
 
   function renderShows() {
     return shows.map((s) => {
-      return (
+      if (s) {
+              return (
         <div className="show-wrapper">
-          <img src={s.image.medium}
+          <img src={s.image? s.image.medium : unk}
           alt={s.name}/>
         </div>
-      )
+      )}
     });
   }
  
   return(
-
-    <>
+<>
     {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>}
-    {shows? renderShows(): 'Loading Shows'}
 
-    </>
+    <div className="shows">
+      <div className="shows-grid">
+        {loaded? renderShows(): 'Loading Shows'}
+      </div>
+
+    </div>
+</>
   )
 }
 {/* <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(shows))}`}
