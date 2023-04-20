@@ -3,14 +3,17 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    border: 1px solid lightgrey;
+    padding: 50px 0;
+    height: 100%;
     .network-wrapper {
         display:flex;
         // border: solid black 2px;
         justify-content: center;
         align-items: center;
         // overflow:scroll;
-        width: 85%;
-        height: 150px;
+        width: 90%;
+        // height: 125px;
 
         .network-name {
             padding: 10px;
@@ -24,6 +27,7 @@
             .episode-wrapper{
                 border: black solid 1px;
                 min-width: fit-content;
+                height: 100%;
                 padding: 10px;
                 
             }

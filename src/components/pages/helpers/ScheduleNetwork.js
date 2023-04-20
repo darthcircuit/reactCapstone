@@ -16,9 +16,9 @@ export default function ScheduleNetwork(props) {
   return (
     <div className="network-wrapper" key={networkName}>
 
-      <h4 className="network-name">
+      <h3 className="network-name">
         {networkName}
-      </h4>
+      </h3>
 
         <div className="shows-wrapper">
 

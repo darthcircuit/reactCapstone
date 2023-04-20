@@ -52,13 +52,11 @@ export default function Shows() {
   return(
 
     <>
-    <h1>Today's Lineup</h1>
 
     {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>}
 
     {/* {sched? renderShows(): null} */}
 
-    {sched? <Schedule sched={sched} /> : null}
     {/* {sched? <ScheduleEpisode /> : null} */}
     </>
   )

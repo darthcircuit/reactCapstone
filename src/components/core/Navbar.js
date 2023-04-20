@@ -13,12 +13,13 @@ export default function Navbar() {
       </div>
       
       <div className="link-wrapper">
-      <NavLink activeClassName="active-link" to="/about">About</NavLink>
+      <NavLink activeClassName="active-link" to="/schedule">Schedule</NavLink>
       </div>
       
       <div className="link-wrapper">
-      <NavLink activeClassName="active-link" to="/schedule">Schedule</NavLink>
+      <NavLink activeClassName="active-link" to="/about">About</NavLink>
       </div>
+      
 
 
     </div>

@@ -8,7 +8,7 @@ import About from "./components/pages/About"
 import Shows from "./components/pages/Shows"
 import ShowPage from "./components/pages/ShowPage"
 import Footer from "./components/core/Footer"
-import Schedule from './components/pages/helpers/Schedule'
+import Lineup from './components/pages/Lineup'
 
 export default function App() {
   return (
@@ -22,7 +22,7 @@ export default function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/shows" component={Shows} />
-          {/* <Route exact path="/schedule" component={Schedule} /> */}
+          <Route exact path="/schedule" component={Lineup} />
           <Route path="/shows/:id" component={ShowPage} />
           <Route exact path="/about" component={About} />
 

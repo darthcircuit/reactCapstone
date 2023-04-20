@@ -1,13 +1,12 @@
 import { useState, useEffect } from 'react'
 
-import ScheduleEpisode from "./ScheduleEpisode"
 import ScheduleNetwork from "./ScheduleNetwork"
 
 export default function Schedule(props) {
 
   const [networks, setNetworks] = useState({})
-  const time = String(new Date(Date.now()))
   const shows = props.sched
+  const date = props.date
 
   useEffect(() => {
     if (!shows) {
@@ -23,24 +22,18 @@ export default function Schedule(props) {
         workingNetworks[networkName] = [];
       }
 
-      workingNetworks[networkName].push(show);
+      workingNetworks[networkName].push(show)
+      workingNetworks[networkName].sort((arr) => arr.airtime)
     });
 
     setNetworks(workingNetworks);
-    // console.log(workingNetworks);
   }, [shows]);
-
-
-  function renderEpisodes(){
-
-    // return shows.map((show) => <ScheduleEpisode show={show} />)
-  }
 
   function renderNetworks(){
     
     return (
       
-      Object.keys(networks).map((n) => {
+      Object.keys(networks).sort().map((n) => {
 
         if (n) {
           return <ScheduleNetwork shows={networks[n]} name={n} key={n}/>
@@ -52,11 +45,12 @@ export default function Schedule(props) {
     )
   }
 
-
-
   return (
 
     <div className="schedule">
+      <h1 className="date">
+        Schedule for {date}
+      </h1>
       {renderNetworks()}
     </div>
   )
