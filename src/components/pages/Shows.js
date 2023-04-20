@@ -1,71 +1,70 @@
 import { useEffect, useState } from "react"
 
-import ShowItem from "./helpers/ShowItem"
-import Schedule from "./helpers/Schedule"
-import ScheduleEpisode from "./helpers/ScheduleEpisode"
 export default function Shows() {
   
   const [loaded, setLoaded] = useState(false)
-  const [sched, setSched] = useState(null)
+  const [shows, setShows] = useState([])
+  const [page, setPage] = useState(0)
 
   useEffect(() => {
-    // console.log(localStorage.getItem("tv"))
-    if (localStorage.getItem('tv')) {
-      setLoaded(true)
-      setSched(JSON.parse(localStorage.getItem('tv')))
-    } else {
-      fetchSchedule()
+    if (loaded) {
+      return
     }
-  },[])
+    fetchAllShows()
+  },[loaded, shows])
 
   function handleClick() {
     setLoaded(false)
-    localStorage.clear()
-    fetchSchedule()
-
-    
+    fetchAllShows()
   }
 
 
-  const fetchSchedule = () => {
-    fetch("https://api.tvmaze.com/schedule")
+  const fetchAllShows = () => {
+    fetch(`https://api.tvmaze.com/shows?page=${page}`)
+    .then((r) => {
+      if (r.status === 200) {
+        return r.json()
+      } else {
+        stopFetching()
+        throw new Error('Reached last page')
+      }
+    })
+    .then((d) => setShows((prev) => [...prev, ...d]))
+    .then(() => setPage((p) => p+1))
     
-    .then((r) => r.json())
-    .then((d) => localStorage.setItem("tv", JSON.stringify(d)))
-    .then(() => setSched(JSON.parse(localStorage.getItem('tv'))))
-    .catch((e) => console.error("Error Fetching Today's Schedule " +e))
-
+    .catch((e) => console.error(`No more shows to fetch ${page}:\n${e}`))
+    
+  }
+  
+  function stopFetching() {
+    setLoaded(true)
+    console.log(shows)
+    setPage(0)
   }
 
 
   function renderShows() {
-    // console.log(sched)
-    return sched.map((s) => {
-      // console.log(s)
-      return <ShowItem key={s.id} show={s}/>;
+    return shows.map((s) => {
+      return (
+        <div className="show-wrapper">
+          <img src={s.image.medium}
+          alt={s.name}/>
+        </div>
+      )
     });
   }
-  // console.log(localStorage.getItem("tv"))
-
  
-  
   return(
 
     <>
-
     {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>}
+    {shows? renderShows(): 'Loading Shows'}
 
-    {/* {sched? renderShows(): null} */}
-
-    {/* {sched? <ScheduleEpisode /> : null} */}
     </>
   )
 }
-// <a
-//         href={`data:text/json;charset=utf-8,${encodeURIComponent(
-//           JSON.stringify(sched)
-//         )}`}
-//         download="sched.json"
-//       >
-//         {`Download Json`}
-//       </a>
+{/* <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(shows))}`}
+  download="shows.json"
+  >
+  {`Download Json`}
+  </a> */}
