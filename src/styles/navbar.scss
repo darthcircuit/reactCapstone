@@ -1,4 +1,6 @@
 .navbar {
+    @include nav-color;
+    @include drop-shadow;
     position: fixed;
     top: 0;
     display: flex;
@@ -6,7 +8,9 @@
     align-items: center;
     height: 40px;
     width: 100%;
-    background-color: #515151;
+    z-index: 10;
+    // background-color: #515151;
+
     
     a {
         color: white;
@@ -16,8 +20,7 @@
 
     
     .active-link {
-        color: #515151;
-        background-color: white;
+        color: #a374ff;
     }
     
 }

@@ -6,7 +6,9 @@ export default function Shows() {
   const [loaded, setLoaded] = useState(false)
   const [shows, setShows] = useState([])
   const [page, setPage] = useState(270)
-  
+  const [genres, setGenres] = useState([])
+  const [toRender, setToRender] = useState([])
+  const [countries, setCountries] = useState([])
 
   useEffect(() => {
     if (loaded) {
@@ -50,8 +52,15 @@ export default function Shows() {
       if (s) {
               return (
         <div className="show-wrapper">
-          <img src={s.image? s.image.medium : unk}
-          alt={s.name}/>
+          
+          <div className="image-wrapper">
+            <img src={s.image? s.image.medium : unk} alt={s.name}/>
+          </div>
+
+          <div className="title-wrapper">
+            {s.name}
+          </div>
+
         </div>
       )}
     });
