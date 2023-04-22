@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-import Schedule from "./helpers/Schedule"
+import Schedule from "./sched/Schedule"
 
 
 export default function Lineup() {
@@ -20,6 +20,7 @@ export default function Lineup() {
   },[])
 
   const fetchSchedule = () => {
+    setDate(today)
     fetch(`https://api.tvmaze.com/schedule/?date=${date}`)
     
     .then((r) => r.json())

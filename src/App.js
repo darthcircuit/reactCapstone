@@ -6,7 +6,7 @@ import Home from "./components/pages/Home"
 import Contact from "./components/pages/Contact"
 import About from "./components/pages/About"
 import Shows from "./components/pages/Shows"
-import ShowPage from "./components/pages/ShowPage"
+import ShowPage from "./components/pages/shows/ShowPage"
 import Footer from "./components/core/Footer"
 import Lineup from './components/pages/Lineup'
 
