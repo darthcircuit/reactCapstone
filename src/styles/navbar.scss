@@ -16,6 +16,10 @@
         color: white;
         font-weight: bold;
         padding: 15px;
+
+        &:hover {
+            color: $accent;
+        }
     }
 
     

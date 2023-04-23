@@ -19,5 +19,9 @@
         color: white;
         padding-left: 15px;
         border-left: 2px solid $accent;
+
+        &:hover {
+            color: $accent;
+        }
     }
 }

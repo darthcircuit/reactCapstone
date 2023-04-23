@@ -1,0 +1,11 @@
+.loading-progress-container {
+    width:100%;
+    background-color: none;
+    border: 1px solid $accent;
+
+    .loading-progress-fill {
+        text-align: center;
+        background-color: $accent;
+        color: white;
+    }
+}

@@ -1,27 +1,56 @@
 import { useEffect, useState } from "react"
+import Select from "react-dropdown-select"
 
 import RenderShow from "./shows/RenderShow"
+import LoadingBar from "../helpers/LoadingBar"
 
 export default function Shows() {
   
-  const [loaded, setLoaded] = useState(false)
-  const [shows, setShows] = useState([])
-  const [page, setPage] = useState(0)
-  const [genres, setGenres] = useState([])
-  const [toRender, setToRender] = useState([])
-  const [countries, setCountries] = useState({})
-  const [topHundred, setTopHundred] =useState([])
-  const [ chosenCountry, setChosenCountry ] = useState("US")
-
+  const [loaded, setLoaded] = useState(false);
+  const [shows, setShows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [percent, setPercent] = useState(((page/275) * 100).toFixed(0));
+  const [genres, setGenres] = useState(new Set());
+  const [toRender, setToRender] = useState([]);
+  const [countries, setCountries] = useState([
+    { 
+      value: "US",
+      label: "United States"
+    },
+    {
+      value:  "GB",
+      label: "Great Britain"
+    },
+    {
+      value:  "FR",
+      label: "France"
+    },
+    {
+      value:  "JP",
+      label: "Japan"
+    },
+    {
+      value:  "DE",
+      label: "Germany"
+    },
+    {
+      value:  "RU",
+      label: "Russia"
+    },
+  ]);
+  const [ chosenCountry, setChosenCountry ] = useState("US");
+  const [ showIds, setShowIds ] = useState([]);
   useEffect(() => {
     if (loaded) {
       return
     }
     fetchAllShows()
-  },[loaded, shows])
+  },[loaded, shows, percent, genres])
 
   function handleClick() {
     setLoaded(false)
+    setShows([])
+    setToRender([])
     fetchAllShows()
   }
 
@@ -29,7 +58,6 @@ export default function Shows() {
     fetch(`https://api.tvmaze.com/shows?page=${page}`)
     .then((r) => {
       if (r.status === 200) {
-        // console.log(`fetching page: ${page}`)
         return r.json()
       } else {
         stopFetching()
@@ -37,30 +65,39 @@ export default function Shows() {
       }
     })
     .then((d) => {
+      const workingShows = [];
+      const workingIds = [];
+      const workingGenres = new Set();
       
       setShows((prev) => {
-        const workingShows = []
-        const workingGenres = []
+        
         d.forEach((s) => {
-          const countryCode = s.network?.country ? s.network.country.code : 'TDB'
+          const countryCode = s.network?.country ? s.network.country.code : 'UNK'
           if(countryCode === chosenCountry) {
-            workingShows.push(s)
+            if (!workingIds.includes(s.id)){
+              workingIds.push(s.id)
+              workingShows.push(s)
+              setGenres((p) => {
+                s.genres.forEach((g)=> {
+                  p.add(g)
+                })
+                return p
+              })
+              
+            }
           }
-
-          // s.genres.forEach((g)=> {
-          //   if (!workingGenres.includes(g)) {
-          //     workingGenres.push(g)
-          //   }
-
-          //   setGenres((prev)=> [...prev, ...workingGenres])
-          // })
-
+          
         })
+
         return [...prev, ...workingShows]
     })
   }
     )
     .then(() => setPage((p) => p+1))
+    .then(() => {
+      // console.log(((page/275) * 100).toFixed(0))
+      setPercent(((page/275) * 100).toFixed(0))
+    })
     
     .catch((e) => console.error(`Program has failed successfully. No more shows to fetch ${page}:\n${e}`))
     
@@ -70,28 +107,52 @@ export default function Shows() {
     setLoaded(true)
     setPage(0)
     setToRender(shows.sort((arr) => arr.rating?.average ? arr.rating.average : null).reverse().slice(0,100))
-    }
+    
+  }
+
+  function getCountryLabel() {
+      let workingLabel;
+      countries.forEach((c) => {
+        if(c.value === chosenCountry) {
+          workingLabel = c.label
+        }
+        })
+        return workingLabel
+  }
   
   
   function renderShows() {
+    console.log(genres)
     return (
       toRender.map((s) => {
-        console.log(s)
         return <RenderShow key={s.id} show={s}/>
       })
     )
   }
-
-
-
-    
+  
+  
     return(
       <>
-      {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>}
+
+      {loaded?  <div className="filter">
+
+                  <Select 
+                  options={countries} 
+                  closeOnSelect={true} 
+                  placeholder={getCountryLabel()} 
+                  searchable={false}
+                  onChange={(value) => {
+                    setChosenCountry(value[0].value)
+                  }}/>
+
+
+                  <button onClick={handleClick}>Apply Filter</button>
+                </div>: null}
+        
 
       <div className="shows">
         <div className="shows-grid">
-          {loaded? renderShows(): 'Loading Shows'}
+          {loaded? renderShows(): <LoadingBar percent={percent} />}
         </div>
 
       </div>
