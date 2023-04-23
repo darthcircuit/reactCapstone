@@ -13,7 +13,7 @@ export default function Shows() {
   const [genres, setGenres] = useState(new Set());
   const [toRender, setToRender] = useState([]);
   const [countries, setCountries] = useState([]);
-  const [chosenCountry, setChosenCountry ] = useState("US");
+  const [chosenCountry, setChosenCountry ] = useState("DE");
   const [showIds, setShowIds ] = useState(new Set());
   const [countryCodes, setCountryCodes] = useState(new Set());
   const [countryNames, setCountryNames] = useState(new Set());
@@ -43,10 +43,10 @@ export default function Shows() {
 
   // Extract Show ID and Genres
   useEffect(()=>{
-    if(!shows){
+    if(!shows.length){
       return
     }
-    if (countries) {
+    if (countries.length) {
       return
     }
     shows.forEach(
@@ -117,8 +117,7 @@ export default function Shows() {
 
 
   function handleClick() {
-    setLoaded(false)
-    setShows([])
+    // setLoaded(false)
     setToRender([])
     
   }
