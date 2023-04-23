@@ -142,8 +142,8 @@ export default function Shows() {
                 </div>: null}
         
 
-      <div className="shows">
         <div className="loading">{loaded? null : <LoadingBar percent={percent} />}</div>
+      <div className="shows">
         <div className="shows-grid">
           {loaded? renderShows(): null}
         </div>
