@@ -8,12 +8,13 @@
         align-items: center;
         width:75%;
         background-color: none;
-        border: 1px solid $accent;
+        border: 3px solid $accent;
         border-radius: 8px;
         @include drop-shadow;
         
         .loading-progress-fill {
             padding: 10px;
+            border-radius: 8px;
             text-align: center;
             font-size: 5rem;
             background-color: $accent;
