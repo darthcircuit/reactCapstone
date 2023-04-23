@@ -66,16 +66,13 @@ export default function Shows() {
     })
     .then((d) => {
       const workingShows = [];
-      const workingIds = [];
-      const workingGenres = new Set();
       
       setShows((prev) => {
         
         d.forEach((s) => {
+
           const countryCode = s.network?.country ? s.network.country.code : 'UNK'
           if(countryCode === chosenCountry) {
-            if (!workingIds.includes(s.id)){
-              workingIds.push(s.id)
               workingShows.push(s)
               setGenres((p) => {
                 s.genres.forEach((g)=> {
@@ -83,8 +80,6 @@ export default function Shows() {
                 })
                 return p
               })
-              
-            }
           }
           
         })
@@ -95,7 +90,6 @@ export default function Shows() {
     )
     .then(() => setPage((p) => p+1))
     .then(() => {
-      // console.log(((page/275) * 100).toFixed(0))
       setPercent(((page/275) * 100).toFixed(0))
     })
     
@@ -120,9 +114,7 @@ export default function Shows() {
         return workingLabel
   }
   
-  
   function renderShows() {
-    console.log(genres)
     return (
       toRender.map((s) => {
         return <RenderShow key={s.id} show={s}/>
@@ -151,17 +143,12 @@ export default function Shows() {
         
 
       <div className="shows">
+        <div className="loading">{loaded? null : <LoadingBar percent={percent} />}</div>
         <div className="shows-grid">
-          {loaded? renderShows(): <LoadingBar percent={percent} />}
+          {loaded? renderShows(): null}
         </div>
 
       </div>
     </>
   )
 }
-
-{/* <a href={`data:text/json;charset=utf-8,${encodeURIComponent(JSON.stringify(shows))}`}
-  download="shows.json"
-  >
-  {`Download Json`}
-  </a> */}
