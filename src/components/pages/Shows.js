@@ -7,20 +7,22 @@ import LoadingBar from "../helpers/LoadingBar"
 export default function Shows() {
   
   const [loaded, setLoaded] = useState(false);
+  const [showsFetched, setShowsFetched] = useState(false);
+  const [cached, setCached] = useState(false);
   const [shows, setShows] = useState([]);
   const [page, setPage] = useState(0);
   const [percent, setPercent] = useState(((page/275) * 100).toFixed(0));
   const [genres, setGenres] = useState(new Set());
   const [toRender, setToRender] = useState([]);
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(new Set());
   const [chosenCountry, setChosenCountry ] = useState("US");
   const [showIds, setShowIds ] = useState(new Set());
-  const [countryCodes, setCountryCodes] = useState(new Set());
-  const [countryNames, setCountryNames] = useState(new Set());
+  // const [countryCodes, setCountryCodes] = useState(new Set());
+  // const [countryNames, setCountryNames] = useState(new Set());
 
   // Fetch Data
   useEffect(() => {
-    if (loaded) {
+    if (showsFetched) {
       return
     }
 
@@ -29,7 +31,8 @@ export default function Shows() {
       if (r.status === 200) {
         return r.json()
       } else {
-        setLoaded(true)
+        // setLoaded(true)
+        setShowsFetched(true)
         setPage(0)
         throw new Error('Reached last page')
       }
@@ -43,12 +46,15 @@ export default function Shows() {
 
   // Extract Show ID and Genres
   useEffect(()=>{
-    if(!shows){
+    if(!showsFetched || cached){
       return
-    }
-    if (countries) {
-      return
-    }
+    } 
+
+    getCountriesGenres()
+
+  }, [showsFetched, cached])
+
+  function getCountriesGenres() {
     shows.forEach(
       (s) => {
         s.genres.forEach((g)=> {
@@ -56,64 +62,56 @@ export default function Shows() {
             p.add(g)
             return p
           })
-          
-        setShowIds((p) => {
-          p.add(s.id)
+
+        // setShowIds((p) => {
+        //   p.add(s.id)
+        //   return p
+        // })
+        
+        setCountries((p) => {
+          const countryCode = s.network?.country ? s.network.country.code : 'UNK'
+          const countryName = s.network?.country ? s.network.country.name : "Unknown"
+          p.add(JSON.stringify({value: countryCode, label: countryName}))
           return p
         })
 
-        setCountryCodes((p) => {
-            const countryCode = s.network?.country ? s.network.country.code : 'UNK'
-          p.add(countryCode)
-          return p
-        })
-        setCountryNames((p) => {
-            const countryName = s.network?.country ? s.network.country.name : "Unknown"
-          p.add(countryName)
-          return p
-        })
-
+        // localStorage.setItem(`${s.id}`, JSON.stringify(s))
       })
-      })
-  }, [showIds, countries, countryCodes, countryNames, genres, shows])
+    })
 
-  // Populate Country Dropdown List
-  useEffect(() => {
-    if (!loaded){
-      return
-    }
-    if (!countries.length) {
-      return
-    }
-
-    const codes = Array.from(countryCodes)
-    const names = Array.from(countryNames)
-    for (let i in codes) {
-      setCountries((prev) => {
-        return [...prev, {value: codes[i], label: names[i]}]
-      })
-    }
-  }, [countries, loaded, countryNames, countryCodes])
+    // localStorage.setItem(`showIds`, JSON.stringify(showIds))
+    setCached(true)
+  }
 
   // Set Render to specified Country
   useEffect(() => {
-    if(toRender.length) {
+    if(!cached) {
       return
     }
     const workingShows = []
-    shows.forEach((s) => {
-      if ((s.network? s.network.country.code : null ) === chosenCountry) {
-        console.log(s)
-        workingShows.push(s)
+    const workingIds = []
+    let topShows = []
+    // let show;
+    shows.forEach((show) => {
+      if(workingIds.includes(show.id)) {
+        return
+      }
+      if ((show.network? show.network.country.code : null ) === chosenCountry) {
+        workingIds.push(show.id)
+        workingShows.push(show)
       } 
-
-     
-      workingShows.sort((a) => a.rating?.average ? a.rating.average : null ).reverse().slice(0,100)
+      
     })
+    console.log("Sorting Shows")
 
-    setToRender(workingShows)
+    topShows = workingShows.sort((a, b) => (a.rating.average? a.rating.average : 0) > (b.rating.average? b.rating.average : 0)).reverse().slice(0,100)
+
+    console.log(topShows)
+    setToRender(topShows)
+    setLoaded(true)
+
   }
-    ,[chosenCountry, toRender])
+    ,[chosenCountry, cached, loaded])
 
 
   function handleClick() {
@@ -133,7 +131,6 @@ export default function Shows() {
 
   function getCountryLabel() {
     
-    console.log(countries)
     let workingLabel;
       countries.forEach((c) => {
         if(c.value === chosenCountry) {
