@@ -16,32 +16,37 @@
             height: 100%;
             position: relative;
             &:hover{
+
+                cursor: pointer;
                 .title-wrapper{
                     display: flex;
                     text-align: center;
                     color:white;
-                    transition: .1s;
                 }
+
                 
                 .image-wrapper{
-                    transition: .1s;
-                    filter:blur(3px);
-            }
+                    transition: .3s;
+                    filter:blur(3px) contrast(80%) brightness(50%) grayscale(60%) ;
+                
+                    
+                }
             }
             .title-wrapper{
+                transition: .3s;
+                user-select: none;
                 justify-content: center;
                 align-items: center;
                 position: relative;
-                width: 210px;
+                width: 80%;
                 height: 100%;
-                bottom: 300px;
-                left: 11px;
-                margin-bottom: -200px;
+                bottom: 100%;
+                left: 10%;
+                margin-bottom: -100%;
                 font-size: 1.5rem;
                 display: none;
-                // padding: 15px;
                 text-align: center;
-                background-color: rgba(1,1,1,50%);
+
                 
 
                 

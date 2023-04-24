@@ -34,8 +34,23 @@ export default function Lineup() {
     setLoaded(false)
     localStorage.clear()
     fetchSchedule()
+  }
 
-    
+  
+  function handleYesterday() {
+    setLoaded(false)
+    localStorage.clear()
+    fetchSchedule()
+  }
+  
+  function handleTomorrow() {
+    const today = new Date()
+    // const tomorrow = `${today.getFullYear()}-${today.getMonth()}-${today.getDate()+1}`.toJSON().slice(0,10)
+    // console.log(tomorrow)
+    // .toJSON().slice(0,10)
+    // setLoaded(false)
+    // localStorage.clear()
+    // fetchSchedule()
   }
   
   return(
@@ -43,7 +58,9 @@ export default function Lineup() {
     <>
     {/* <h1>Today's Lineup</h1> */}
 
-    {/* {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>} */}
+    {loaded? <button onClick={handleYesterday}>Yesterday</button> : null}
+    {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>}
+    {loaded? <button onClick={handleTomorrow}>Tomorrow</button> : null}
 
     {/* {sched? renderShows(): null} */}
 

@@ -18,6 +18,7 @@
         padding: 15px;
 
         &:hover {
+            transition: .3s;
             color: $accent;
         }
     }
