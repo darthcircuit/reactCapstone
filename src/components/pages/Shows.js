@@ -144,7 +144,7 @@ export default function Shows() {
     return (
       toRender.map((s) => {
         // console.log(s)
-        return <RenderShow key={s.id} show={s}/>
+        return <RenderShow key={s.id} show={s} rating={s.rating.average? s.rating.average * 10 : 0}/>
       })
     )
   }
