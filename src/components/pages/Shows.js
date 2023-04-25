@@ -16,7 +16,6 @@ export default function Shows() {
   const [toRender, setToRender] = useState([]);
   const [countries, setCountries] = useState(new Set());
   const [chosenCountry, setChosenCountry ] = useState("US");
-  const [showIds, setShowIds ] = useState(new Set());
   // const [countryCodes, setCountryCodes] = useState(new Set());
   // const [countryNames, setCountryNames] = useState(new Set());
 
@@ -26,6 +25,7 @@ export default function Shows() {
       return
     }
 
+    localStorage.clear()
     fetch(`https://api.tvmaze.com/shows?page=${page}`)
     .then((r) => {
       if (r.status === 200) {
@@ -106,7 +106,8 @@ export default function Shows() {
 
     topShows = workingShows.sort((a, b) => (a.rating.average? a.rating.average : 0) > (b.rating.average? b.rating.average : 0)).reverse().slice(0,100)
 
-    console.log(topShows)
+    
+    
     setToRender(topShows)
     setLoaded(true)
 
@@ -143,7 +144,7 @@ export default function Shows() {
   function renderShows() {
     return (
       toRender.map((s) => {
-        // console.log(s)
+        localStorage.setItem(`${s.id}`, JSON.stringify(s))
         return <RenderShow key={s.id} show={s} rating={s.rating.average? s.rating.average * 10 : 0}/>
       })
     )

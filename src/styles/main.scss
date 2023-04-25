@@ -1,4 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+
 $accent: #a374ff;
+$accent-alt: rgba(216, 28, 101, 75%);
+
 @import "./mixins.scss";
 
 @import "./common.scss";
@@ -8,3 +12,5 @@ $accent: #a374ff;
 @import "./schedule.scss";
 @import "./showsGrid.scss";
 @import "./loadingBar.scss";
+@import "./ratings.scss";
+@import "./showpage.scss";

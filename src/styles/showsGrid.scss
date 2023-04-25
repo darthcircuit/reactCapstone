@@ -48,32 +48,6 @@
                 text-align: center;
                 flex-direction: column;
                 
-                .ratings-container {
-
-                    width: 80%;
-                    
-                    
-                    .ratings-wrapper {
-                        height: 65px;
-                        background-color: $accent;
-                        background-clip: text;
-                        
-                        .stars {
-                            // position: relative;
-                            display: flex;
-                            // bottom: 12%;
-                            width: 147px;
-                            .star {
-                                height: 100%;
-                                width: 100%;
-                                text-align: center;
-                                // background-color: $accent;
-                                color: transparent;
-                                clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-                            }
-                        }
-                    }
-                }
                 
             }
 
