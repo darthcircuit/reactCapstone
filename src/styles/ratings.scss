@@ -24,20 +24,7 @@
     }
 }
 
-.showpage-ratings{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    // font-size: 3rem;
-    width: 100%;
-    h2 {
-        font-size: 5rem;
-        background-color: $accent-alt;
-        clip-path: circle();
-        padding: 65px;
-    }
-}
+
 //     .ratings-container {
 //         width: 147px;
 //         display: flex;

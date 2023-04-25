@@ -1,13 +1,65 @@
 .hero-section{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     margin: 0;
+    margin-bottom: 25px;
     width: 100%;
-    height: 450px;
+    height: 400px;
     // border: 1px solid red; 
     background-size: cover;
     background-position: center;
     .title-wrapper {
-        // min-width: 100vw;
-        // min-height: 100%;
+        top: 5%;
+        position: fixed;
         font-size: 8vw;
-        }
+    h1 {
+        position: relative;
+        margin: 0;
+    }
+
+
+    
+}
+.showpage-ratings{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    h2 {
+        font-size: 5rem;
+        background-color: $accent-alt;
+        clip-path: circle();
+        padding: 65px;
+        margin: 0;
+        position: relative;
+        bottom: -225px;
+    }
+}
+
+
+
+}
+
+.page-content {
+    margin-top: 125px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 50px;
+    // display: grid;
+    
+    // grid-template-columns: 1fr 1fr;
+
+    .summary-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 80%;
+    }
+    
+
 }

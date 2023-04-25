@@ -23,13 +23,17 @@ export default function ShowPage(props) {
     <div className="showpage-ratings">
 
       <h2>{rating}</h2>
-      <div className="ratings-container">
-        
-      </div>
+
       </div>
     </div>
 
+    <div className="page-content">
+
+    <div className="summary-container">
+
     <Markup content={summary} />
+    </div>
+    </div>
     </>
 
   )
