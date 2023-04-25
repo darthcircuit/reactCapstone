@@ -11,12 +11,14 @@
     background-size: cover;
     background-position: center;
     .title-wrapper {
-        top: 5%;
-        position: fixed;
-        font-size: 8vw;
-    h1 {
+        top: 50%;
+        width: 100%;
         position: relative;
-        margin: 0;
+        white-space: nowrap;
+        h1 {
+            font-size: 750%;
+            position: relative;
+            margin-top: 0;
     }
 
 
@@ -28,14 +30,16 @@
     align-items: center;
     flex-direction: column;
     width: 100%;
+    position: relative;
+    top: 50px;
     h2 {
         font-size: 5rem;
         background-color: $accent-alt;
         clip-path: circle();
         padding: 65px;
-        margin: 0;
-        position: relative;
-        bottom: -225px;
+        // margin-top: 50px;
+        // position: relative;
+        // bottom: -225px;
     }
 }
 

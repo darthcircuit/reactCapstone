@@ -16,8 +16,6 @@ export default function Shows() {
   const [toRender, setToRender] = useState([]);
   const [countries, setCountries] = useState(new Set());
   const [chosenCountry, setChosenCountry ] = useState("US");
-  // const [countryCodes, setCountryCodes] = useState(new Set());
-  // const [countryNames, setCountryNames] = useState(new Set());
 
   // Fetch Data
   useEffect(() => {
@@ -55,6 +53,9 @@ export default function Shows() {
   }, [showsFetched, cached])
 
   function getCountriesGenres() {
+    const workingCountries = new Set()
+    const workingCountriesArray = []
+
     shows.forEach(
       (s) => {
         s.genres.forEach((g)=> {
@@ -63,23 +64,15 @@ export default function Shows() {
             return p
           })
 
-        // setShowIds((p) => {
-        //   p.add(s.id)
-        //   return p
-        // })
-        
-        setCountries((p) => {
           const countryCode = s.network?.country ? s.network.country.code : 'UNK'
           const countryName = s.network?.country ? s.network.country.name : "Unknown"
-          p.add(JSON.stringify({value: countryCode, label: countryName}))
-          return p
+          workingCountries.add(JSON.stringify({value: countryCode, label: countryName}))
+          
+          // localStorage.setItem(`${s.id}`, JSON.stringify(s))
         })
-
-        // localStorage.setItem(`${s.id}`, JSON.stringify(s))
       })
-    })
-
-    // localStorage.setItem(`showIds`, JSON.stringify(showIds))
+      workingCountries.forEach(c => workingCountriesArray.push(JSON.parse(c)))
+      setCountries(workingCountriesArray)
     setCached(true)
   }
 
@@ -131,10 +124,14 @@ export default function Shows() {
 
 
   function getCountryLabel() {
+
+
     
     let workingLabel;
+
       countries.forEach((c) => {
         if(c.value === chosenCountry) {
+          
           workingLabel = c.label
         }
         })
