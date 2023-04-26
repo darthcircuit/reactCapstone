@@ -16,6 +16,7 @@ export default function Shows() {
   const [toRender, setToRender] = useState([]);
   const [countries, setCountries] = useState([]);
   const [chosenCountry, setChosenCountry ] = useState("WW");
+  const [chosenGenre, setChosenGenre] = useState("");
 
   // Fetch Data
   useEffect(() => {
@@ -62,10 +63,6 @@ export default function Shows() {
       (s) => {
         s.genres.forEach((g)=> {
           workingGenres.add(g)
-          // setGenres((p) => {
-          //   p.add(g)
-          //   return p
-          // })
 
           const countryCode = s.network?.country ? s.network.country.code : 'UNK'
           const countryName = s.network?.country ? s.network.country.name : "Unknown"
@@ -84,7 +81,7 @@ export default function Shows() {
     setCached(true)
   }
 
-  // Set Render to specified Country
+  // Set Render to specified Country or genre
   useEffect(() => {
     if(!cached) {
       return
@@ -92,12 +89,14 @@ export default function Shows() {
     const workingShows = []
     const workingIds = []
     let topShows = []
-    // let show;
     shows.forEach((show) => {
       if(workingIds.includes(show.id)) {
         return
       }
 
+      if(chosenGenre && !show.genres.includes(chosenGenre)) {
+        return
+      }
 
       if ((show.network? show.network.country.code : null ) === chosenCountry || (chosenCountry === 'WW')) {
         workingIds.push(show.id)
@@ -105,8 +104,6 @@ export default function Shows() {
       } 
       
     })
-    console.log(genres)
-
     topShows = workingShows.sort((a, b) => (a.rating.average? a.rating.average : 0) > (b.rating.average? b.rating.average : 0)).reverse().slice(0,100)
 
     
@@ -115,7 +112,7 @@ export default function Shows() {
     setLoaded(true)
 
   }
-    ,[chosenCountry, cached, loaded])
+    ,[chosenCountry, cached, loaded, chosenGenre])
 
 
   function handleClick() {
@@ -125,27 +122,15 @@ export default function Shows() {
     
   }
 
-  
-  // function stopFetching() {
 
-  //   extractGenresIds()
-  //   setToRender(shows.sort((arr) => arr.rating?.average ? arr.rating.average : null).reverse().slice(0,100))
-  // }
-
-
-  function getCountryLabel() {
-
-
-    
+  function getCountryLabel() { 
     let workingLabel;
-
-      countries.forEach((c) => {
-        if(c.value === chosenCountry) {
-          
-          workingLabel = c.label
-        }
-        })
-        return workingLabel
+    countries.forEach((c) => {
+    if(c.value === chosenCountry) {    
+      workingLabel = c.label
+      }
+    })
+    return workingLabel
   }
   
   function renderShows() {
@@ -156,58 +141,56 @@ export default function Shows() {
       })
     )
   }
-  
-  
+
+
     return(
       <>
       {loaded?  
           <div className="filter">
 
-            <Select 
-              className="country-dropdown"
-              options={Array.from(countries)} 
-              closeOnSelect={true} 
-              placeholder={getCountryLabel()} 
-              dropdownGap={0}
-              searchable={false}
-              onChange={(value) => {
-                setChosenCountry(value[0].value)
-            }}/>
+            <div className="country-dropdown">
+
+              <Select 
+                className="dropdown"
+                options={Array.from(countries)} 
+                closeOnSelect={true} 
+                placeholder={getCountryLabel()} 
+                dropdownGap={0}
+                searchable={false}
+                onChange={(value) => {
+                  setChosenCountry(value[0].value)
+              }}/>
+            </div>
 
             <div className="genre-dropdown">
-
-            <Select 
-              className="genres-dropdown"
-              options={genres} 
-              closeOnSelect={true} 
-              // placeholder={getCountryLabel()} 
-              dropdownGap={0}
-              searchable={false}
-            //   onChange={(value) => {
-            //     // setChosenCountry(value[0].value)
-            // }}
-            />
-            </div>
-                
+              <Select 
+                className="dropdown"
+                options={genres} 
+                closeOnSelect={true} 
+                placeholder="Pick a Genre" 
+                dropdownGap={0}
+                searchable={false}
+                onChange={(value) => setChosenGenre(value[0].value)}
+              />
+              
+              </div>
           </div>
 
       : null}
 
-
-
-{/* <button onClick={handleClick}>Apply Filter</button> */}
-        
-
-        <div className="loading">{loaded? null : <LoadingBar percent={percent} />}</div>
+      <div className="loading">{loaded? null : <LoadingBar percent={percent} />}</div>
       <div className="shows" style={{display: 'flex', flexDirection: 'column'}}>
-          {(loaded && chosenCountry)? <div>
-                                        <h1>Top Shows</h1>  
-                                        <p className="title-accent">{getCountryLabel()}</p>
-                                      </div>
-                                    :
-                                      <h1>Loading</h1>}
-        <div className="shows-grid">
+        {(loaded && chosenCountry)? 
+          <div>
+            <h1>Top Shows</h1>  
+            <p className="title-accent">{getCountryLabel()}</p>
+          </div>
+          
+          : <h1>Loading</h1>
+        }
 
+
+        <div className="shows-grid">
           {loaded? renderShows(): null}
         </div>
 
@@ -215,3 +198,4 @@ export default function Shows() {
     </>
   )
 }
+{/* <button onClick={handleClick}>Apply Filter</button> */}
