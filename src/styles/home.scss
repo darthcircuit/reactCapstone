@@ -1,0 +1,19 @@
+.home-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .page-content {
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        a{
+            color: white;
+            text-decoration: underline;
+        }
+}
+
+}

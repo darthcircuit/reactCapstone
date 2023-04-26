@@ -7,13 +7,31 @@
     height: 100%;
     padding-bottom: 50px;
 
-    .title-accent {
-        font-family: 'Roboto', sans-serif;
-        color: $title;
-        font-size: 6rem;
-        margin: 5px;
-        font-weight:900;
+    .title {
+
+        .title-header {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            h1 {
+                padding: 5px;
+                font-size: 4rem;
+            }
+
+            .title-genre{
+                @include title-text;
+                font-size: 4rem;
+            }
+        }
+
+        .title-country {
+            @include title-text;
+            font-size: 6rem;
+
+        }
     }
+
     .shows-grid{
         @include repeating-list;
         position: relative;

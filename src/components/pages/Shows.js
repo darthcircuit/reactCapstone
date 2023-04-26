@@ -57,7 +57,7 @@ export default function Shows() {
     const workingCountries = new Set()
     const workingCountriesArray = []
     const workingGenres = new Set()
-    const workingGenresArray = []
+    const workingGenresArray = [{value: "", label: "All Genres"}]
 
     shows.forEach(
       (s) => {
@@ -181,9 +181,10 @@ export default function Shows() {
       <div className="loading">{loaded? null : <LoadingBar percent={percent} />}</div>
       <div className="shows" style={{display: 'flex', flexDirection: 'column'}}>
         {(loaded && chosenCountry)? 
-          <div>
-            <h1>Top Shows</h1>  
-            <p className="title-accent">{getCountryLabel()}</p>
+          <div className="title">
+            <span className="title-header"><h1>Top</h1><p className="title-genre">{chosenGenre}</p><h1>Shows</h1></span>
+            
+            <p className="title-country">{getCountryLabel()}</p>
           </div>
           
           : <h1>Loading</h1>

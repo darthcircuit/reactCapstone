@@ -21,3 +21,10 @@
     color: white;
     
 }
+
+@mixin title-text {
+    margin: 5px;
+    font-weight:900;
+    font-family: 'Roboto', sans-serif;
+    color: $title;
+}

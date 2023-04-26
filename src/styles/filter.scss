@@ -1,6 +1,6 @@
 .filter {
     // background-color: white;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,6 +10,9 @@
         text-align: left;
         font-weight: bold;
         background-color: white;
+        padding: 10px;
+        width: 175px;
+        margin: 7px;
 
     }
 }
