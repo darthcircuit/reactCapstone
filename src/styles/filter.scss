@@ -1,0 +1,15 @@
+.filter {
+    // background-color: white;
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    .country-dropdown {
+        color: $accent;
+        text-align: left;
+        font-weight: bold;
+        background-color: white;
+
+    }
+}

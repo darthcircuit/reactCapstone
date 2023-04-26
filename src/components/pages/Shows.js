@@ -12,10 +12,10 @@ export default function Shows() {
   const [shows, setShows] = useState([]);
   const [page, setPage] = useState(0);
   const [percent, setPercent] = useState(((page/275) * 100).toFixed(0));
-  const [genres, setGenres] = useState(new Set());
+  const [genres, setGenres] = useState([]);
   const [toRender, setToRender] = useState([]);
-  const [countries, setCountries] = useState(new Set());
-  const [chosenCountry, setChosenCountry ] = useState("US");
+  const [countries, setCountries] = useState([]);
+  const [chosenCountry, setChosenCountry ] = useState("WW");
 
   // Fetch Data
   useEffect(() => {
@@ -55,24 +55,32 @@ export default function Shows() {
   function getCountriesGenres() {
     const workingCountries = new Set()
     const workingCountriesArray = []
+    const workingGenres = new Set()
+    const workingGenresArray = []
 
     shows.forEach(
       (s) => {
         s.genres.forEach((g)=> {
-          setGenres((p) => {
-            p.add(g)
-            return p
-          })
+          workingGenres.add(g)
+          // setGenres((p) => {
+          //   p.add(g)
+          //   return p
+          // })
 
           const countryCode = s.network?.country ? s.network.country.code : 'UNK'
           const countryName = s.network?.country ? s.network.country.name : "Unknown"
-          workingCountries.add(JSON.stringify({value: countryCode, label: countryName}))
-          
-          // localStorage.setItem(`${s.id}`, JSON.stringify(s))
+
+          if (countryCode !== "UNK"){
+            workingCountries.add(JSON.stringify({value: countryCode, label: countryName}))
+          }
         })
       })
+      workingGenres.forEach(g => workingGenresArray.push({value: g, label: g}))
+      setGenres(workingGenresArray)
+
       workingCountries.forEach(c => workingCountriesArray.push(JSON.parse(c)))
-      setCountries(workingCountriesArray)
+      setCountries([...workingCountriesArray, {value: "WW", label: "Worldwide"}])
+
     setCached(true)
   }
 
@@ -89,13 +97,15 @@ export default function Shows() {
       if(workingIds.includes(show.id)) {
         return
       }
-      if ((show.network? show.network.country.code : null ) === chosenCountry) {
+
+
+      if ((show.network? show.network.country.code : null ) === chosenCountry || (chosenCountry === 'WW')) {
         workingIds.push(show.id)
         workingShows.push(show)
       } 
       
     })
-    console.log("Sorting Shows")
+    console.log(genres)
 
     topShows = workingShows.sort((a, b) => (a.rating.average? a.rating.average : 0) > (b.rating.average? b.rating.average : 0)).reverse().slice(0,100)
 
@@ -150,26 +160,52 @@ export default function Shows() {
   
     return(
       <>
+      {loaded?  
+          <div className="filter">
 
-      {loaded?  <div className="filter">
+            <Select 
+              className="country-dropdown"
+              options={Array.from(countries)} 
+              closeOnSelect={true} 
+              placeholder={getCountryLabel()} 
+              dropdownGap={0}
+              searchable={false}
+              onChange={(value) => {
+                setChosenCountry(value[0].value)
+            }}/>
 
-                  <Select 
-                  options={Array.from(countries)} 
-                  closeOnSelect={true} 
-                  placeholder={getCountryLabel()} 
-                  searchable={false}
-                  onChange={(value) => {
-                    setChosenCountry(value[0].value)
-                  }}/>
+            <div className="genre-dropdown">
+
+            <Select 
+              className="genres-dropdown"
+              options={genres} 
+              closeOnSelect={true} 
+              // placeholder={getCountryLabel()} 
+              dropdownGap={0}
+              searchable={false}
+            //   onChange={(value) => {
+            //     // setChosenCountry(value[0].value)
+            // }}
+            />
+            </div>
+                
+          </div>
+
+      : null}
 
 
-                  <button onClick={handleClick}>Apply Filter</button>
-                </div>: null}
+
+{/* <button onClick={handleClick}>Apply Filter</button> */}
         
 
         <div className="loading">{loaded? null : <LoadingBar percent={percent} />}</div>
       <div className="shows" style={{display: 'flex', flexDirection: 'column'}}>
-          {(loaded && chosenCountry)? <h1>Top 100 Shows in {getCountryLabel()}:</h1> : <h1>Top 100 Shows Worldwide:</h1>}
+          {(loaded && chosenCountry)? <div>
+                                        <h1>Top Shows</h1>  
+                                        <p className="title-accent">{getCountryLabel()}</p>
+                                      </div>
+                                    :
+                                      <h1>Loading</h1>}
         <div className="shows-grid">
 
           {loaded? renderShows(): null}

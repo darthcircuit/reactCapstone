@@ -1,3 +1,4 @@
+
 .shows {
     display: flex;
     justify-content: center;
@@ -6,6 +7,13 @@
     height: 100%;
     padding-bottom: 50px;
 
+    .title-accent {
+        font-family: 'Roboto', sans-serif;
+        color: $title;
+        font-size: 6rem;
+        margin: 5px;
+        font-weight:900;
+    }
     .shows-grid{
         @include repeating-list;
         position: relative;
