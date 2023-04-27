@@ -1,0 +1,21 @@
+.about-page {
+    display: flex;
+    justify-items: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    .page-content {
+        margin-top:0;
+        display: flex;
+        flex-direction: column;
+        width: 75%;
+        .section-wrapper {
+            width: 100%;
+            text-align: justify;
+
+            a {
+                color: $accent-alt
+            }
+        }
+    }
+}
