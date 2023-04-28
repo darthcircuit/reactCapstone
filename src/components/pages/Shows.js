@@ -24,7 +24,7 @@ export default function Shows() {
       return
     }
 
-    localStorage.clear()
+    // localStorage.clear()
     fetch(`https://api.tvmaze.com/shows?page=${page}`)
     .then((r) => {
       if (r.status === 200) {

@@ -58,9 +58,9 @@ export default function Lineup() {
     <>
     {/* <h1>Today's Lineup</h1> */}
 
-    {loaded? <button onClick={handleYesterday}>Yesterday</button> : null}
+    {/* {loaded? <button onClick={handleYesterday}>Yesterday</button> : null}
     {loaded? <button onClick={handleClick}>Refresh Schedule</button> : <p>Loading</p>}
-    {loaded? <button onClick={handleTomorrow}>Tomorrow</button> : null}
+    {loaded? <button onClick={handleTomorrow}>Tomorrow</button> : null} */}
 
     {/* {sched? renderShows(): null} */}
 

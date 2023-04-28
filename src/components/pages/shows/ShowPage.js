@@ -1,5 +1,8 @@
 import { Markup } from 'interweave'
 
+import ShowReview from './ShowReview';
+import unk from "../../../images/unknown-big.png"
+
 export default function ShowPage(props) {
 
   const showId = props.match.params.id
@@ -7,12 +10,10 @@ export default function ShowPage(props) {
   const summary = show.summary;
   const rating = show.rating?.average? show.rating.average : 0;
 
-  console.log(show)
-
   return(
     <>
 
-    <div className="hero-section" style={{backgroundImage: `url(${show.image.original}`}}>
+    <div className="hero-section" style={{backgroundImage: `url(${show.image? show.image.original : unk}`}}>
 
       <div className="title-wrapper">        
 
@@ -29,10 +30,21 @@ export default function ShowPage(props) {
 
     <div className="page-content">
 
-    <div className="summary-container">
+      <div className="info-container">
+        <p><b className='bolded'>Runtime:</b> {show.runtime} Minutes</p>
+        <p><b className='bolded'>Type:</b> {show.type}</p>
+        <p><b className='bolded'>Language:</b> {show.language}</p>
+        <p><b className='bolded'>Status:</b> {show.status}</p>
+        <p><b className='bolded'>Premier Date:</b> {show.premiered}</p>
+        {show.ended? <p><b className='bolded'>Ended:</b> {show.ended}</p> : null}
+      </div>
 
-    <Markup content={summary} />
-    </div>
+      <div className="summary-container">
+        <Markup content={summary} />
+      </div>
+
+      <ShowReview showId={showId} />
+
     </div>
     </>
 

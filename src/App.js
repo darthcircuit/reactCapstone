@@ -1,3 +1,6 @@
+import ReactDOM from 'react-dom'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import "./styles/main.scss"
@@ -10,6 +13,8 @@ import ShowPage from "./components/pages/shows/ShowPage"
 import Footer from "./components/core/Footer"
 import Lineup from './components/pages/Lineup'
 
+
+library.add(fas,)
 export default function App() {
   return (
     <div className="App">

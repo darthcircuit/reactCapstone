@@ -55,6 +55,18 @@
     justify-content: center;
     margin-bottom: 50px;
     // display: grid;
+    flex-direction: column;
+
+    .info-container {
+        display: flex;
+        p {
+            padding: 10px;
+        }
+        .bolded {
+            color: $title;
+        }
+
+    }
     
     // grid-template-columns: 1fr 1fr;
 

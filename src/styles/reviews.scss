@@ -1,0 +1,30 @@
+.review {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .review-buttons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .button-wrapper {
+            button {
+                color: white;
+                font-size: 5rem;
+                background-color: transparent;
+                outline: none;
+                border: none;
+                @include drop-shadow;
+
+                &:hover {
+                    color: $title;
+                }
+            }
+
+            .reviewed {
+                color: $accent-alt;
+            }
+            padding: 15px;
+        }
+    }
+}
