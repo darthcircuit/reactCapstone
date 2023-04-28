@@ -15,6 +15,7 @@ import Lineup from './components/pages/Lineup'
 
 
 library.add(fas,)
+
 export default function App() {
   return (
     <div className="App">

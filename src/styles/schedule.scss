@@ -1,21 +1,32 @@
 .schedule{
+    scrollbar-width: 3px;
+    scrollbar-color: $accent $accent-alt;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    border: 1px solid lightgrey;
     padding: 50px 0;
     height: 100%;
+    *::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: $accent-alt;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: $accent;
+        border-radius: 5px;
+        border: 1px solid $accent-alt;
+    }
     .network-wrapper {
         display:flex;
-        // border: solid black 2px;
         justify-content: center;
         align-items: center;
-        // overflow:scroll;
         width: 90%;
-        // height: 125px;
-
         .network-name {
+            color: $title;
             padding: 10px;
             width: 150px;
         }
@@ -24,8 +35,11 @@
             height: 100%;
             width: 100%;
             overflow: scroll;
+            @include nav-color;
             .episode-wrapper{
-                border: black solid 1px;
+                // border: black solid 1px;
+                // border-left: 1px $accent solid;
+                border-right: 1px $accent solid;
                 min-width: fit-content;
                 height: 100%;
                 padding: 10px;

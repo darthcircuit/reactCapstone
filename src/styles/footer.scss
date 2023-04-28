@@ -9,20 +9,22 @@
     padding-left: 55px;
     padding-right: 15px;
     height: 40px;
-    // background-color: #515151;
-    // color: #3d3d3d;
     p {
         padding-right: 15px;
 
     }
-    a {
+    .contact-button {
         color: white;
         padding-left: 15px;
         border-left: 2px solid $accent-alt;
 
+
         &:hover {
+            cursor: pointer;
             color: $accent;
             transition: .3s;
         }
+
+
     }
 }

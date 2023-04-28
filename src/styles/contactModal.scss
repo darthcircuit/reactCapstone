@@ -1,0 +1,63 @@
+.contact-modal{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    @include nav-color;
+    @include drop-shadow;
+    button {
+        outline: none;
+        background-color: $accent;
+        border: none;
+        padding: 5px;
+        color: white;
+        margin-top: 5px;
+        @include drop-shadow;
+        &:hover {
+            cursor: pointer;
+            background-color: $accent-alt;
+        }
+
+    }
+
+    .cancel-button {
+        background-color: $accent-alt;
+        margin-left: 5px;
+
+        &:hover {
+            background-color: $accent;
+        }
+    }
+width: fit-content;
+    form {
+        // justify-content: center;
+        padding: 20px;
+        text-align: left;
+        align-items: flex-start;
+        display: flex;
+        flex-direction: column;
+        
+
+        .input-wrapper {
+            display: grid;
+            gap: 5px;
+            width: fit-content;
+
+        }
+
+        label {
+            width: 200px;
+            padding: 5px;
+        }
+
+        textarea {
+            resize: none;
+        }
+
+
+
+    }
+}
