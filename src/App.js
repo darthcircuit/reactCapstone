@@ -5,7 +5,6 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import "./styles/main.scss"
 import Navbar from "./components/core/Navbar"
 import Home from "./components/pages/Home"
-import Contact from "./components/pages/Contact"
 import About from "./components/pages/About"
 import Shows from "./components/pages/Shows"
 import ShowPage from "./components/pages/shows/ShowPage"
@@ -25,7 +24,6 @@ export default function App() {
         <Switch>
 
           <Route exact path="/" component={Home} />
-          <Route exact path="/contact" component={Contact} />
           <Route exact path="/shows" component={Shows} />
           <Route exact path="/schedule" component={Lineup} />
           <Route path="/shows/:id" component={ShowPage} />

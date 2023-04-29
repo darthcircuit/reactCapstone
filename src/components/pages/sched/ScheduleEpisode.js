@@ -10,24 +10,4 @@ export default function ScheduleEpisode(props) {
     </div>
 )
 
-  // console.log(show.name)
-  // return (
-  //   <div className="show-item">
-  //     <div className="banner-img-wrapper">
-  //       <Link to={`/products/${props.id}`}>
-  //         <img
-  //           src={show.image.original}
-  //           height={150}
-  //           alt="Episode main banner"
-  //         />
-  //       </Link>
-  //     </div>
-
-  //     <h5>
-  //       {episode.name} | S{episode.season}E{episode.number} - {show.name}
-  //     </h5>
-
-  //     {/* <p>{props.show.summary}</p> */}
-  //   </div>
-  // );
 }

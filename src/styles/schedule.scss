@@ -37,8 +37,6 @@
             overflow: scroll;
             @include nav-color;
             .episode-wrapper{
-                // border: black solid 1px;
-                // border-left: 1px $accent solid;
                 border-right: 1px $accent solid;
                 min-width: fit-content;
                 height: 100%;

@@ -32,7 +32,6 @@ export default function ShowReview(props) {
     localStorage.setItem(`${showId}-review`, rev)
     setReview(rev)
 
-    // console.log(up.id)
   }
 
   return (

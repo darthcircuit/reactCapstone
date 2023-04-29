@@ -3,8 +3,6 @@ export default function Home() {
 
     <div className="home-page">
 
-     
-
     <div className="title-wrapper">
       <h1>PixelRunner</h1>
 

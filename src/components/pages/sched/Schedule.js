@@ -30,18 +30,12 @@ export default function Schedule(props) {
   }, [shows]);
 
   function renderNetworks(){
-    
     return (
-      
       Object.keys(networks).sort().map((n) => {
-
         if (n) {
           return <ScheduleNetwork shows={networks[n]} name={n} key={n}/>
         }
-
-      }
-      )
-
+      })
     )
   }
 
