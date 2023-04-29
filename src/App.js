@@ -28,7 +28,7 @@ export default function App() {
           <Route exact path="/schedule" component={Lineup} />
           <Route path="/shows/:id" component={ShowPage} />
           <Route exact path="/about" component={About} />
-
+          <Route exact path="/reactCapstone" component={Home} />
 
           <Route render={(routeProps) => (
               <div className='not-found'>
