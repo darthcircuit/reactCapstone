@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/reactCapstone/static/css/main.5044aeda.css",
+    "main.js": "/reactCapstone/static/js/main.6f5b99aa.js",
+    "static/media/unknown-big.png": "/reactCapstone/static/media/unknown-big.f7ad3235c16e44828827.png",
+    "static/media/unknown.png": "/reactCapstone/static/media/unknown.0cf33988859460c8c6c6.png",
+    "index.html": "/reactCapstone/index.html",
+    "main.5044aeda.css.map": "/reactCapstone/static/css/main.5044aeda.css.map",
+    "main.6f5b99aa.js.map": "/reactCapstone/static/js/main.6f5b99aa.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5044aeda.css",
+    "static/js/main.6f5b99aa.js"
+  ]
+}
