@@ -1,5 +1,3 @@
-import { useState } from "react"
-
 import ScheduleEpisode from "./ScheduleEpisode"
 
 export default function ScheduleNetwork(props) {

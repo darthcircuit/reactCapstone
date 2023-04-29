@@ -115,14 +115,6 @@ export default function Shows() {
     ,[chosenCountry, cached, loaded, chosenGenre])
 
 
-  function handleClick() {
-    setLoaded(false)
-    setShows([])
-    setToRender([])
-    
-  }
-
-
   function getCountryLabel() { 
     let workingLabel;
     countries.forEach((c) => {
@@ -199,4 +191,3 @@ export default function Shows() {
     </>
   )
 }
-{/* <button onClick={handleClick}>Apply Filter</button> */}
