@@ -24,13 +24,11 @@ export default function Shows() {
       return
     }
 
-    // localStorage.clear()
     fetch(`https://api.tvmaze.com/shows?page=${page}`)
     .then((r) => {
       if (r.status === 200) {
         return r.json()
       } else {
-        // setLoaded(true)
         setShowsFetched(true)
         setPage(0)
         throw new Error('Reached last page')
@@ -41,45 +39,43 @@ export default function Shows() {
     .then(() => setPercent(((page/275) * 100).toFixed(0)))
     .catch((e) => console.error(`Program has failed successfully. No more shows to fetch ${page}:\n${e}`))
 
-  },[loaded, shows, percent])
+  },[loaded, shows, percent, page, showsFetched])
 
   // Extract Show ID and Genres
   useEffect(()=>{
     if(!showsFetched || cached){
       return
     } 
-
-    getCountriesGenres()
-
-  }, [showsFetched, cached])
-
-  function getCountriesGenres() {
-    const workingCountries = new Set()
-    const workingCountriesArray = []
-    const workingGenres = new Set()
-    const workingGenresArray = [{value: "", label: "All Genres"}]
-
-    shows.forEach(
-      (s) => {
-        s.genres.forEach((g)=> {
-          workingGenres.add(g)
-
-          const countryCode = s.network?.country ? s.network.country.code : 'UNK'
-          const countryName = s.network?.country ? s.network.country.name : "Unknown"
-
-          if (countryCode !== "UNK"){
-            workingCountries.add(JSON.stringify({value: countryCode, label: countryName}))
-          }
+      const workingCountries = new Set()
+      const workingCountriesArray = []
+      const workingGenres = new Set()
+      const workingGenresArray = [{value: "", label: "All Genres"}]
+  
+      shows.forEach(
+        (s) => {
+          s.genres.forEach((g)=> {
+            workingGenres.add(g)
+  
+            const countryCode = s.network?.country ? s.network.country.code : 'UNK'
+            const countryName = s.network?.country ? s.network.country.name : "Unknown"
+  
+            if (countryCode !== "UNK"){
+              workingCountries.add(JSON.stringify({value: countryCode, label: countryName}))
+            }
+          })
         })
-      })
-      workingGenres.forEach(g => workingGenresArray.push({value: g, label: g}))
-      setGenres(workingGenresArray)
+        workingGenres.forEach(g => workingGenresArray.push({value: g, label: g}))
+        setGenres(workingGenresArray)
+  
+        workingCountries.forEach(c => workingCountriesArray.push(JSON.parse(c)))
+        setCountries([...workingCountriesArray, {value: "WW", label: "Worldwide"}])
+  
+      setCached(true)
 
-      workingCountries.forEach(c => workingCountriesArray.push(JSON.parse(c)))
-      setCountries([...workingCountriesArray, {value: "WW", label: "Worldwide"}])
 
-    setCached(true)
-  }
+  }, [showsFetched, cached, shows])
+
+
 
   // Set Render to specified Country or genre
   useEffect(() => {
@@ -112,7 +108,7 @@ export default function Shows() {
     setLoaded(true)
 
   }
-    ,[chosenCountry, cached, loaded, chosenGenre])
+    ,[chosenCountry, cached, loaded, chosenGenre, shows])
 
 
   function getCountryLabel() { 

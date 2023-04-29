@@ -12,7 +12,6 @@ export default function Footer() {
     <div className="footer">
       <p>Copyright 2023 - John Ipson</p>
       <p className="contact-button" onClick={handleModal}>Contact</p>
-      {/* <NavLink activeClassName="active-link" to="/contact">Contact</NavLink> */}
 
       <ReactModal 
         isOpen={showModal}
